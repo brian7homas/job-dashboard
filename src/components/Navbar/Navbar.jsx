@@ -11,8 +11,11 @@ import {
   NavbarMobileMenuButton,
   NavbarButtonSVGs,
   NavbarLogoText,
-  NavbarDarkModeToggle
+  NavbarDarkModeToggle,
+  ProfileImageContainer,
+  ProfileImage
   } from "./Navbar.styles"
+import Profile from "../../assets/profile.jpg"
 
 function Navbar() {
   const { state, setTheme } = useContext(ThemeContext)
@@ -90,9 +93,7 @@ function Navbar() {
           <div>
             <FontAwesomeIcon icon={faEllipsisVertical} />
           </div>
-          <div>
-            <img src="https://placehold.co/30" alt="profile image" />
-          </div>
+          <ProfileImageContainer style={{backgroundImage: `url(${Profile})`}}/>
           <NavbarMobileMenuButton className="mobile-button" onClick={(e) => menuHandler(e)}>
             <NavbarButtonSVGs top=".7em" className="mobile-button-top" />
             <NavbarButtonSVGs top="1.3em" className="mobile-button-mid" />
