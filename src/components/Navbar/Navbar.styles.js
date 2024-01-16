@@ -70,3 +70,17 @@ export const NavbarLogoText = styled.h1`
 export const NavbarDarkModeToggle = styled.div`
   cursor: pointer;
 `
+
+export const ProfileImageContainer = styled.div`
+  height:30px;
+  width: 30px;
+  overflow:hidden;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 9px;
+`
+
+export const ProfileImage = styled.img`
+  place-content:contain;
+`
