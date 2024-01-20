@@ -1,10 +1,14 @@
 import React, { useEffect } from "react"
+import Sidebar from "../../components/Sidebar/Sidebar"
 import { MainContainer } from "./Home.styles"
 function Home() {
   return (
     <>
     <MainContainer>
-      <h1>Hello World</h1>
+      <Sidebar/>
+      <div>
+        <p>main</p>
+      </div>
     </MainContainer>
     </>
   )
