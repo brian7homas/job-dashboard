@@ -2,6 +2,9 @@ import React, { Suspense, lazy, useContext, useEffect } from "react"
 import { DataContext } from "../../context/DataContext";
 import Sidebar from "../../components/Sidebar/Sidebar"
 import Overview from "../../components/Overview/Overview";
+import getData from "../../data/getData";
+import { count } from "../../data/count";
+import { builDataArray } from "../../data/buildDataArray";
 import {
   MainContainer, 
   MainContent, 
@@ -11,35 +14,14 @@ import {
 
   const data01 = [];
   const data02 = [];
-  async function data(state, setData) {
-    let currentStorage = JSON.parse(localStorage.getItem('jobs'))
-    if(currentStorage){
-      console.log('local')
-      const jobs = currentStorage
-      setData({type: 'LOAD', payload: jobs})
-      return jobs
-    }else if(!currentStorage){
-      console.log('fetch')
-      const response = await fetch("/jobs.js")
-      const jobs = await response.json();
-      if(jobs){
-        setData({type: 'LOAD', payload: jobs})
-        localStorage.setItem('jobs', JSON.stringify(jobs))
-      }
-      return jobs
-    }
-  }
-
 function Home() {
   const Chart = lazy(() => import('../../components/ChartPie/ChartPie'))
   const {state, setData} = useContext(DataContext)
   useEffect(() => {
-    let jobData = data(state, setData)
-    jobData
-      .then((res) => {
-        const countBy = (arr, prop, key) => arr.reduce((prev, curr) => ((prev[curr[prop]] = ++prev[curr[prop]] || 1), prev), {})
-        for (const [key, value] of Object.entries(countBy(res, 'company'))) data01.push({ 'name': key, 'value': value })
-        for (const [key, value] of Object.entries(countBy(res, 'role'))) data02.push({ 'role': key, 'value': value })
+    let jobData = getData(state, setData)
+    jobData.then((res) => {
+        builDataArray(count(res, 'company'), data01)
+        builDataArray(count(res, 'role'), data02)
       })
   },[])
   return (
