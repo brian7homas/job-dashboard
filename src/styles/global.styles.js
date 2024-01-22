@@ -35,9 +35,6 @@ export const GlobalStyles = () => {
     body {
       font-size: 1.6rem;
     }
-    h1 {
-      font-size: 4.8rem;
-  }
 `} />
   )
 }
