@@ -9,6 +9,7 @@ export const SidebarContainer = styled.div`
   }
 `
 export const SidebarInnerContainer = styled.div`
+  position:fixed;
   margin:0 auto;
   display:flex;
   flex-direction: column;

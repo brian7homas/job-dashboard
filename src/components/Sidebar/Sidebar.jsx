@@ -19,7 +19,7 @@ function Sidebar() {
         {
           sidebar.map((item) => {
             return (
-              <SidebarButtons text={item.text} icon={item.icon} />
+              <SidebarButtons key={item.text} text={item.text} icon={item.icon} />
             )
           })
         }

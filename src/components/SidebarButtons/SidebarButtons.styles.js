@@ -17,7 +17,7 @@ export const SidebarButton = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   &:hover{
-    color: var(--color-white);
+    color: hsl(0, 0%, 100%);
     background: var(--color-link-hover);
   }
 `

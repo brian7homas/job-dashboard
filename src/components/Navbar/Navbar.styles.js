@@ -2,14 +2,17 @@ import styled from '@emotion/styled'
 import { MaxWidth_1024 } from '../../styles/media-queries/large'
 import { MaxWidth_414 } from '../../styles/media-queries/small'
 export const NavbarContainer = styled.header`
+  z-index: 10;
+  width:100%;
+  position:fixed;
   padding: var(--padding-navbar);
   background-color: var(--color-white);
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: calc((10px + 24.4rem)/1.1) 1fr 1fr;
   grid-template-areas: "logo search profile";
   align-items: center;
   justify-content: space-between;
-  border-bottom: solid 1px var(--color-white);
+  border-bottom: solid .014px var(--color-dark);
   ${MaxWidth_1024[1]} {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas: 
