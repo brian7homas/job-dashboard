@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useContext, useEffect } from "react"
 import { DataContext } from "../../context/DataContext";
 import Sidebar from "../../components/Sidebar/Sidebar"
+import Overview from "../../components/Overview/Overview";
 import {
   MainContainer, 
   MainContent, 
@@ -53,12 +54,12 @@ function Home() {
           </MainContentHeader>
           {/* SECOND GRID ROW */}
           <MainContentOverView>
-            <h1>Jobs tracked: 30</h1>
-            <p>Jobs applied to: 12</p>
+            <Overview />
           </MainContentOverView>
           <Suspense fallback={<div>..loading...</div>}>
             <Chart data01={data01} data02={data02}/>
           </Suspense>
+          {/* THIRD GRID ROW */}
         </MainContent>
     </MainContainer>
     </>
