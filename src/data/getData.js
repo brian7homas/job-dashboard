@@ -1,5 +1,6 @@
 async function getData(state, setData) {
   let currentStorage = JSON.parse(localStorage.getItem('jobs'))
+  const isEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   if(isEqual(currentStorage, state)){
     const jobs = currentStorage
     setData({type: 'LOAD', payload: jobs})
