@@ -2,8 +2,8 @@
   {
     "stage": {
       "takeHomeAssignment": {
-        "received": null,
-        "dateReceived": null
+        "received": true,
+        "dateReceived": "2023-12-29T00:00:00.000Z"
       },
       "applied": "2023-12-29T00:00:00.000Z",
       "phoneScreen": null,
@@ -25,8 +25,8 @@
   {
     "stage": {
       "takeHomeAssignment": {
-        "received": null,
-        "dateReceived": null
+        "received": true,
+        "dateReceived": "2023-12-29T00:00:00.000Z"
       },
       "applied": "2023-12-29T00:00:00.000Z",
       "phoneScreen": null,
@@ -34,7 +34,7 @@
       "result": ""
     },
     "_id": "658b913392e9400018ff07d4",
-    "company": "Twitch",
+    "company": "Discord",
     "role": "frontend develper",
     "contact": "444-444-4444",
     "location": "Remote",
