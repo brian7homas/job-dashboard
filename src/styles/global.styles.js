@@ -6,14 +6,14 @@ export const GlobalStyles = () => {
     :root{
       --color-white: hsl(0, 0%, 100%);
       --color-dark: hsl(0, 0%, 10%);
-      --color-primary: #E63946;
+      --color-primary: rgba(230, 57, 70, 1);
       --color-secondary: #F1FAEE;
       --color-section-bg: #ececec;
       --color-primary-bg: #E63946;
-      --color-custom-btn-bg: #A8DADC;
+      --color-custom-btn-bg: hsla(182, 42%, 46%, .3);
       --color-custom-btn-bg-hover: #1D3557;
       --color-heading: #1D3557;
-      --color-p: #717275;
+      --color-main-bg: hsl(224, 1%, 85%);
       --color-border: #e0e0e5;
       --color-link-hover: #E63946;
       --padding-content: .5em .85em;
