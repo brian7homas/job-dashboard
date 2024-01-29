@@ -16,26 +16,15 @@ export const MainContainer = styled.main`
 export const MainContent = styled.div`
   display:grid;
   place-items: center center;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: .2fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: .2fr .15fr 1fr 1fr;
   background-color:var(--color-main-bg);
   overflow-y: scroll;
   height:200vh;
 `
 export const MainContentHeader = styled.div`
   grid-row-start: 1;
-  grid-column: 1/3;
+  grid-column: 1/4;
   justify-self: flex-start;
   padding:1em 2.5em;
-`
-
-export const MainContentOverView = styled.div`
-  border: 1px solid #A8DADC;
-  align-self: flex-start;
-  padding: 1em 1.5em;
-  background-color: var(--color-custom-btn-bg);
-  border-radius: 9px;
-  margin:.8em;
-  width: 95%;
-  height: 40%;
 `
