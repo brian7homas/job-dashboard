@@ -1,0 +1,1 @@
+export const pluck = (objs, property) => objs.map((obj) => obj[property]);
