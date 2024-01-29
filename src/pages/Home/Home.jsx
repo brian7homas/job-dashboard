@@ -1,15 +1,20 @@
 import React, { Suspense, lazy, useContext, useEffect } from "react"
 import { DataContext } from "../../context/DataContext";
 import Sidebar from "../../components/Sidebar/Sidebar"
-import Overview from "../../components/Overview/Overview";
+import { PhoneScreensDataLogic } from "../../data/phoneScreensDataLogic";
+import { AppliedDataLogic } from "../../data/appliedDataLogic";
+import { InterviewDataLogic } from "../../data/interviewDataLogic";
+import { faBriefcase, faPhone, faUser } from "@fortawesome/free-solid-svg-icons"
 import getData from "../../data/getData";
 import { count } from "../../data/count";
 import { builDataArray } from "../../data/buildDataArray";
+import { PhoneScrensChartOptions } from "../../chartOptions/PhoneScreensChartOptions"
+import { AppliedChartOptions } from "../../chartOptions/AppliedChartOptions";
+import { InterViewChartOptions } from "../../chartOptions/InterviewChartOptions";
 import {
   MainContainer, 
   MainContent, 
-  MainContentHeader,
-  MainContentOverView 
+  MainContentHeader
   } from "./Home.styles"
 
   const data01 = [];
@@ -18,6 +23,16 @@ function Home() {
   const Chart = lazy(() => import('../../components/ChartPie/ChartPie'))
   const DataCard = lazy(() => import('../../components/DataCard/DataCard'))
   const {state, setData} = useContext(DataContext)
+  const appliedFilter = state.map((el) => {
+    if (el.stage.applied !== null) return ({
+      ...el,
+      company: el.company.toLowerCase().trim()
+    })
+  })
+  
+  const appliedData = AppliedDataLogic(state, appliedFilter)
+  const phoneData = PhoneScreensDataLogic(state)
+  const interviewData = InterviewDataLogic(state)
   useEffect(() => {
     let jobData = getData(state, setData)
     jobData.then((res) => {
