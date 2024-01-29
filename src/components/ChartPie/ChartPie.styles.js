@@ -4,8 +4,8 @@ export const ChartPie = styled.div`
   background-color: hsla(182, 43%, 76%, .2);
   padding:1em;
   border-radius: 9px;
-  grid-column: 2/3;
-  grid-row-start:2;
+  grid-column: 1/2;
+  grid-row-start:3;
   justify-self: center;
   align-self: flex-start;
   transform-origin: bottom;

@@ -7,7 +7,7 @@ import {
   PieChart,
   Pie,
   ResponsiveContainer
-  } from 'recharts'
+  } from "recharts"
 
 const colors = [
   `hsla(355.49132947976875, 77.57847533632287%, 56.27450980392157%, 1)`,
