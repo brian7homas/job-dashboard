@@ -11,6 +11,7 @@ import { builDataArray } from "../../data/buildDataArray";
 import { PhoneScrensChartOptions } from "../../chartOptions/PhoneScreensChartOptions"
 import { AppliedChartOptions } from "../../chartOptions/AppliedChartOptions";
 import { InterViewChartOptions } from "../../chartOptions/InterviewChartOptions";
+import { Grid } from "@radix-ui/themes"
 import {
   MainContainer, 
   MainContent, 
@@ -42,9 +43,17 @@ function Home() {
   },[])
   return (
     <>
-      <MainContainer>
+      <Grid 
+        height="100%" 
+        columns="calc((10px + 24.4rem)/1.1) 2fr"
+        position="relative"
+        top="2.9rem">
         <Sidebar />
-        <MainContent>
+        <Grid 
+          columns="1fr 1fr 1fr" 
+          rows=".2fr .15fr 1fr 1fr"
+          align="center"
+          justify="center">
           {/* FIRST GRID ROW */}
           <MainContentHeader>
             <h1>Overview</h1>
@@ -85,8 +94,8 @@ function Home() {
             <Chart data01={data01} data02={data02}/>
           </Suspense>
           {/* THIRD GRID ROW */}
-        </MainContent>
-    </MainContainer>
+        </Grid>
+    </Grid>
     </>
   )
 }
