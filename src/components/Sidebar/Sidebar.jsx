@@ -1,10 +1,12 @@
 import React from "react"
 import SidebarButtons from "../SidebarButtons/SidebarButtons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHome, faBriefcase, faPerson, faGear, faQuestion } from "@fortawesome/free-solid-svg-icons"
 import {
   SidebarContainer,
   SidebarInnerContainer
   } from "./Sidebar.styles"
+import { Text, Button, Flex } from '@radix-ui/themes'
 const sidebar = [
   {text:'Home', icon: faHome},
   {text: 'My Jobs', icon: faBriefcase},
@@ -19,7 +21,15 @@ function Sidebar() {
         {
           sidebar.map((item) => {
             return (
-              <SidebarButtons key={item.text} text={item.text} icon={item.icon} />
+              <Flex key={item.text}>
+              <Button 
+                size="3" 
+                variant="outline" 
+                highContrast>
+                <FontAwesomeIcon icon={item.icon} /> 
+                {item.text}
+              </Button>
+              </Flex>
             )
           })
         }
