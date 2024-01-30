@@ -6,17 +6,22 @@ import { GlobalStyles } from './styles/global.styles';
 import Navbar from './components/Navbar/Navbar';
 import { ThemeProvider } from './context/ThemeContext';
 import { DataProvider } from './context/DataContext';
+import '@radix-ui/themes/styles.css';
+import './styles/theme-config.css';
+import { Theme } from '@radix-ui/themes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
     <GlobalStyles />
-    <ThemeProvider>
       <DataProvider>
-        <Navbar />
-        <Home />
+        <Theme>
+          <ThemeProvider>
+          <Navbar/>
+          <Home/>
+          </ThemeProvider>
+        </Theme>
       </DataProvider>
-    </ThemeProvider>
   </>
 );
 
