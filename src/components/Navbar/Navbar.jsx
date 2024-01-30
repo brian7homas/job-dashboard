@@ -52,7 +52,6 @@ function Navbar() {
   }
   useEffect(() => {
     if(localStorage.getItem('dashboard-theme') === 'dark'){
-      console.log('set to: ' + localStorage.getItem('dashboard-theme'))
       setTheme({
         type: 'DARK',
         payload: { theme: 'dark' }
