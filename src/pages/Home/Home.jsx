@@ -13,8 +13,6 @@ import { AppliedChartOptions } from "../../chartOptions/AppliedChartOptions";
 import { InterViewChartOptions } from "../../chartOptions/InterviewChartOptions";
 import { Grid } from "@radix-ui/themes"
 import {
-  MainContainer, 
-  MainContent, 
   MainContentHeader
   } from "./Home.styles"
 
@@ -53,7 +51,9 @@ function Home() {
           columns="1fr 1fr 1fr" 
           rows=".2fr .15fr 1fr 1fr"
           align="center"
-          justify="center">
+          justify="center"
+          px="9"
+          pt="7">
           {/* FIRST GRID ROW */}
           <MainContentHeader>
             <h1>Overview</h1>
