@@ -1,20 +1,28 @@
-import styled from "@emotion/styled"
+import { css } from '@emotion/react'
 import { MaxWidth_1024 } from "../../styles/media-queries/large"
-export const SidebarContainer = styled.div`
-  padding:4.5em 2.5em 19em 2em;
-  border-right: solid .014px var(--color-dark);
-  overflow:hidden;
-  ${MaxWidth_1024[1]} {
-    display:none;
-  }
-`
-export const SidebarInnerContainer = styled.div`
-  position:fixed;
-  margin:0 auto;
-  display:flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height:100%;
-  min-height: 40rem;
-  max-height: 40rem;
-`
+export const SidebarStyles = {
+  container:css({
+    padding:'4.5em 2.5em 19em 2em',
+    borderRight: 'solid .014px var(--color-dark)',
+    overflow:'hidden',
+    [MaxWidth_1024[1]]:{
+      display:'none'
+    }
+  }),
+  innerContainer: css({
+    position:'fixed',
+    margin:'0 auto',
+    display:'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    height:'100%',
+    minHeight: '40rem',
+    maxHeight: '40rem',
+  }),
+  item:css({
+    listStyle:'none'
+  }),
+  button: css({
+    cursor: 'pointer'
+  })
+}
