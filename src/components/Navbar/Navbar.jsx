@@ -1,20 +1,18 @@
-import React, { useContext, useEffect, useState } from "react"
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from '@emotion/react';
+import { useContext, useEffect } from "react"
 import { ThemeContext } from "../../context/ThemeContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBell, faEllipsisVertical, faBox, faMoon, faSun } from "@fortawesome/free-solid-svg-icons"
 import { FlexAlignCenter } from "../../styles/utils/flexAlignCenter.styles"
-import { css } from "@emotion/react"
 import {
-  NavbarContainer,
-  NavbarSearch,
-  NavbarForm,
-  NavbarMobileMenuButton,
+  NavbarStyles,
   NavbarButtonSVGs,
-  NavbarLogoText,
-  NavbarDarkModeToggle,
-  ProfileImageContainer,
-  ProfileImage
   } from "./Navbar.styles"
+import { Box, Button } from "@radix-ui/themes"
+import * as Menubar from '@radix-ui/react-menubar';
+import * as Form from '@radix-ui/react-form';
 import Profile from "../../assets/profile.jpg"
 
 function Navbar() {
@@ -59,49 +57,51 @@ function Navbar() {
     }
   },[])
   return (
-    <>
-      <NavbarContainer>
-        <FlexAlignCenter justify="start" gridArea="logo">
-          <FontAwesomeIcon icon={faBox} css={css`padding-right: 1em`} />
-          <NavbarLogoText>Jobs</NavbarLogoText>
-        </FlexAlignCenter>
-
+    <Menubar.Root css={NavbarStyles.container}>
+      <Menubar.Menu>
         <FlexAlignCenter
           justify="start"
-          gridArea="search"
-        // css={css`width: auto;@media (max-width: 768px) {width: 100vw;}`}
-        >
-          <NavbarForm action="#" method="get">
-            <NavbarSearch type="text" placeholder="Search" />
-          </NavbarForm>
+          gridArea="logo">
+          <FontAwesomeIcon icon={faBox} css={NavbarStyles.icon}></FontAwesomeIcon>
+          <h1 css={NavbarStyles.title}>Jobs</h1>
         </FlexAlignCenter>
-
+      </Menubar.Menu>
+      <Menubar.Menu>
+        <FlexAlignCenter
+          justify="start"
+          gridArea="search">
+          <Form.Root css={NavbarStyles.form} action="#" method="get">
+            <Form.FormField>
+              <Form.Control asChild>
+                <input css={NavbarStyles.search} type="text" placeholder="Search" title="search" />
+              </Form.Control>
+            </Form.FormField>
+          </Form.Root>
+        </FlexAlignCenter>
+      </Menubar.Menu>
+      <Menubar.Menu>
         <FlexAlignCenter
           justify="space-between"
           gridArea="profile"
-          padding="9em"
-        >
-          <NavbarDarkModeToggle onClick={() => darkModeToggleHandler()}>
-            {
-              state.theme !== 'light' ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />
-            }
-          </NavbarDarkModeToggle>
-          <div>
+          padding="9em">
+          <Box css={NavbarStyles.darkMode} onClick={() => darkModeToggleHandler()}>
+            {state.theme !== 'light' ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
+          </Box>
+          <Box>
             <FontAwesomeIcon icon={faBell} />
-          </div>
-          <div>
+          </Box>
+          <Box>
             <FontAwesomeIcon icon={faEllipsisVertical} />
-          </div>
-          <ProfileImageContainer style={{backgroundImage: `url(${Profile})`}}/>
-          <NavbarMobileMenuButton className="mobile-button" onClick={(e) => menuHandler(e)}>
+          </Box>
+          <Box css={NavbarStyles.image} style={{ backgroundImage: `url(${Profile})` }} />
+          <Button css={NavbarStyles.mobileMenu} className="mobile-button" onClick={(e) => menuHandler(e)}>
             <NavbarButtonSVGs top=".7em" className="mobile-button-top" />
             <NavbarButtonSVGs top="1.3em" className="mobile-button-mid" />
             <NavbarButtonSVGs top="1.9em" className="mobile-button-bottom" />
-          </NavbarMobileMenuButton>
+          </Button>
         </FlexAlignCenter>
-
-      </NavbarContainer>
-    </>
+      </Menubar.Menu>
+    </Menubar.Root>
   )
 }
 
