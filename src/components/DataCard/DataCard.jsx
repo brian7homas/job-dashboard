@@ -1,28 +1,85 @@
-import React, {Suspense, useContext, useEffect, useState} from "react"
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
+import { Suspense } from 'react'
 import { AgChartsReact } from 'ag-charts-react';
+import { FlexAlignCenter } from '../../styles/utils/flexAlignCenter.styles'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { DataCardStyles } from './DataCard.styles'
+import { Heading, Box, Badge, Text, Card } from '@radix-ui/themes'
+
 function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) {
   return(
+    <Card
+      variant="surface"
+      size="3"
       color={average < 50 ? "red" : "green"}
+      // style={{maxWidth:204}}
+      css={DataCardStyles.container}
+      mt="3"
+      >
+      <FlexAlignCenter 
+        justify="space-between" 
+        >
         <FontAwesomeIcon icon={icon} />
+        <Heading 
+          highContrast={true}
+          as="h1" 
+          size="5" 
+          weight="bold"
+          // trim="both"
+          css={DataCardStyles.heading}
           color={average < 50 ? "red" : "green"}>{title}</Heading>
       </FlexAlignCenter>
-      <FlexAlignCenter>
-        <DataText fontSize=".07">
-          {metric}
-        </DataText>
-        <div style={{maxWidth:'70%', height:'100%', paddingTop:'1.5em'}}>
-          <Suspense fallback={<div>...loading</div>}>
+      
+      <FlexAlignCenter 
+        justify="stretch"
+        >
+        <Box 
+          style={{
+            width:300, 
+            height:"100%", 
+            paddingTop:"2em"
+            }}>
+          <Suspense fallback={<Box>...loading</Box>}>
             <AgChartsReact options={chartOptions} />
           </Suspense>
-        </div>
+        </Box>
       </FlexAlignCenter>
+      
+      <Box pt="9" pb="2">
+        <FlexAlignCenter justify="space-between">
+          <Text
+            weight="light"
+          >
+              Total: 
+          </Text>
           <Badge highContrast variant="soft" size="2" color={average < 50 ? "red" : "green"}>
+            {metric}
+          </Badge>
+          <Text
+            weight="light"
+          >
+              Average: 
+          </Text>
+          <Badge highContrast variant="soft" size="2" color={average < 50 ? "red" : "green"}>
+            {average}%
+          </Badge>
+        </FlexAlignCenter>
+      </Box>
+      
       <FlexAlignCenter justify="space-between">
-        <JobsAppliedTo>
+        <Text 
+          as="span"
+          size="1"
+          css={DataCardStyles.subTitle}>
           {sub}
+        </Text>
+        <Text>
           {subData}
+        </Text>
       </FlexAlignCenter>
-    </MainContentOverView>
+    </Card>
   )
 }
 
