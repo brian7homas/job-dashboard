@@ -62,32 +62,35 @@ function Home() {
           {/* SECOND GRID ROW */}
           <Suspense fallback={<div>..loading...</div>}>
             <DataCard
-              metric={appliedData.length}
-              chartOptions={AppliedChartOptions(appliedData)}
-              subData={((100 * appliedData.length) / state.length).toFixed(0)}
-              title='Applied'
+              metric={appliedData.appliedLocations.length}
+              chartOptions={AppliedChartOptions(appliedData.appliedLocations)}
+              average={((100 * appliedData.appliedLocations.length) / state.length).toFixed(0)}
+              title="Applied"
               icon={faBriefcase}
-              sub='Location'
+              sub="Location most applied to:"
+              subData={appliedData.mostFrequent}
             />
           </Suspense>
           <Suspense fallback={<div styles="color:white;">..loading...</div>}>
             <DataCard
-              metric={phoneData.length}
-              chartOptions={PhoneScrensChartOptions(phoneData)}
-              subData={((100 * phoneData.length) / state.length).toFixed(0)}
-              title='Phone screens'
+              metric={phoneData.phoneScreenDates.length}
+              chartOptions={PhoneScrensChartOptions(phoneData.phoneScreenDates)}
+              average={((100 * phoneData.phoneScreenDates.length) / state.length).toFixed(0)}
+              title="Phone screens"
               icon={faPhone}
-              sub='Date'
+              sub="Next phone screen"
+              subData={phoneData.mostRecentDate}
             />
           </Suspense>
           <Suspense fallback={<div>..loading...</div>}>
             <DataCard
-              metric={interviewData.length}
-              chartOptions={InterViewChartOptions(interviewData)}
-              subData={((100 * interviewData.length) / state.length).toFixed(0)}
-              title='Interviews'
+              metric={interviewData.interviewDates.length}
+              chartOptions={InterViewChartOptions(interviewData.interviewDates)}
+              average={((100 * interviewData.interviewDates.length) / state.length).toFixed(0)}
+              title="Interviews"
               icon={faUser}
-              sub='Date'
+              sub="Next interview"
+              subData={interviewData.mostRecentInterviewDate}
             />
           </Suspense>  
           <Suspense fallback={<div>..loading...</div>}>

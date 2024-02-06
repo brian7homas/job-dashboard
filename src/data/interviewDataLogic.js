@@ -1,3 +1,13 @@
+import { count } from "./count"
+function findMostFrequentDate(obj) {
+  let prevValue = 0
+  for (const [key, value] of Object.entries(count(obj, "interviewFormattedDate"))) {
+    if(new Date(value) > prevValue){
+      prevValue = value
+      return key
+    }
+  } 
+}
 export const InterviewDataLogic = (state) => {
   const InterviewDates = []
   let interviewCounter = 0
@@ -24,5 +34,8 @@ export const InterviewDataLogic = (state) => {
       })
     }
   }
-  return InterviewDates
+  return({
+    mostRecentInterviewDate: findMostFrequentDate(InterviewDates),
+    interviewDates: InterviewDates
+  })
 }

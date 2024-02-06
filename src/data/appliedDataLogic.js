@@ -1,9 +1,21 @@
+import { count } from "./count"
 /**
  * 
  * @param {DataContext} state 
  * @param {Filter} seperateFilter 
  * @returns 
  */
+ 
+ function findMostFrequentEntry(obj){
+  let prevValue = 0
+  let arr = count(obj, 'appliedLocation')
+  for (const [key, value] of Object.entries(arr)) {
+    if(value > prevValue){
+      prevValue = value
+      return key
+    }
+  }
+ }
 export const AppliedDataLogic = (state) => {
   let appliedLocations = []
   let appliedCounter = 0
@@ -33,7 +45,8 @@ export const AppliedDataLogic = (state) => {
       })
     }
   }
-  return(
-    appliedLocations
-  )
+  return({
+    mostFrequent: findMostFrequentEntry(appliedLocations),
+    appliedLocations: appliedLocations
+  })
 }

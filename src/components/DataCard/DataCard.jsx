@@ -1,25 +1,10 @@
 import React, {Suspense, useContext, useEffect, useState} from "react"
 import { AgChartsReact } from 'ag-charts-react';
-import { DataContext } from "../../context/DataContext"
-import { FlexAlignCenter } from "../../styles/utils/flexAlignCenter.styles"
-import { DataBackDrop } from "../../styles/utils/dataBackDrop.styles"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { fontSize } from "../../styles/utils/fontSize.styles"
-import {
-  JobsTracked,
-  JobsAppliedTo,
-  MainContentOverView,
-  DataText,
-  JobsRatio
-} from "./DataCard.styles"
-    
-function DataCard({ icon, title, sub, subData, chartOptions, metric }) {
-  const { state } = useContext(DataContext)
+function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) {
   return(
-    <MainContentOverView color={subData < 50 ? "red" : "green"}>
-      <FlexAlignCenter justify="space-between" style={{ fontSize: fontSize(.02) }}>
+      color={average < 50 ? "red" : "green"}
         <FontAwesomeIcon icon={icon} />
-        <JobsTracked fontSize=".02">{title}</JobsTracked>
+          color={average < 50 ? "red" : "green"}>{title}</Heading>
       </FlexAlignCenter>
       <FlexAlignCenter>
         <DataText fontSize=".07">
@@ -31,16 +16,11 @@ function DataCard({ icon, title, sub, subData, chartOptions, metric }) {
           </Suspense>
         </div>
       </FlexAlignCenter>
+          <Badge highContrast variant="soft" size="2" color={average < 50 ? "red" : "green"}>
       <FlexAlignCenter justify="space-between">
         <JobsAppliedTo>
           {sub}
-        </JobsAppliedTo>
-        {/* {((100 * xData.length)/state.length).toFixed(0)} */}
-        <DataBackDrop color={subData < 50 ? "red" : "green"}>
-          <JobsRatio>
-            {subData}%
-          </JobsRatio>
-        </DataBackDrop>
+          {subData}
       </FlexAlignCenter>
     </MainContentOverView>
   )
