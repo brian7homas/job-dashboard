@@ -257,7 +257,7 @@
       },
       "applied": null,
       "phoneScreen": null,
-      "faceToface": null,
+      "faceToface": "2024-01-29T21:25:12.000Z",
       "result": null
     },
     "_id": "6590818f45934b001812b3d0",
@@ -279,7 +279,7 @@
       },
       "applied": null,
       "phoneScreen": null,
-      "faceToface": null,
+      "faceToface": "2023-12-29T21:25:12.000Z",
       "result": null
     },
     "_id": "65908ac445934b001812b425",
@@ -301,7 +301,7 @@
       },
       "applied": null,
       "phoneScreen": null,
-      "faceToface": null,
+      "faceToface": "2023-12-30T21:25:12.000Z",
       "result": null
     },
     "_id": "65908ac445934b001812b425",
