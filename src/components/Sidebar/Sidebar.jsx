@@ -22,8 +22,8 @@ function Sidebar() {
         {
           sidebar.map((item) => {
             return (
-              <NavigationMenu.Item css={SidebarStyles.item}>
-                <Flex key={item.text}>
+              <NavigationMenu.Item css={SidebarStyles.item} key={item.text}>
+                <Flex>
                   <Button
                     css={SidebarStyles.button}
                     size="3"
