@@ -31,7 +31,7 @@ let getData = () => ([
   },
 ])
 let colors = {
-  dataText: 'black',
+  dataText: "black",
   companies: {
     main:"#29ddaa",
     hoverFill: "#7839e6",
@@ -61,12 +61,12 @@ let sharedProps = {
 export const BarChartOptions = () => {
   return({
     title: {
-      fontFamily: 'Unbounded',
-      text: "Companies and positions applied to",
+      fontFamily: "Unbounded",
+      text: 'Role details',
     },
     subtitle: {
-      fontFamily: 'Unbounded',
-      text: "Breakdown of each company and the position applied for",
+      fontFamily: "Unbounded",
+      text: "Breakdown of each role and location",
     },
     data: getData(),
     background: {
@@ -84,7 +84,7 @@ export const BarChartOptions = () => {
         fillOpacity:sharedProps.fillOpacity,
         stroke: colors.companies.main,
         strokeWidth: sharedProps.strokeWidth,
-        cursor: 'pointer',
+        cursor: "pointer",
         highlightStyle: {
           item: {
             fill: colors.companies.hoverFill,
@@ -101,11 +101,10 @@ export const BarChartOptions = () => {
         },
         label:{
           color:"white",
-          fontFamily:'Unbounded',
+          fontFamily:"Unbounded",
           fontSize:11,
-          placement:'inside',
-          // formatter:({value}) => value.toFixed(0)
-          formatter: ({ value, datum }) => datum.position + ' ' + value.toFixed(0)
+          placement:"inside",
+          formatter: ({ value, datum }) => datum.position + " " + value.toFixed(0)
         },
       },
       
@@ -133,10 +132,9 @@ export const BarChartOptions = () => {
         },
         label:{
           color:"white",
-          fontFamily:'Unbounded',
+          fontFamily:"Unbounded",
           fontSize:9,
-          placement:'inside',
-          // formatter:({value}) => value.toFixed(0)
+          placement:"outside",
           formatter: ({ value, datum }) => value.toFixed(0)
         },
         type: "bar",
@@ -168,10 +166,9 @@ export const BarChartOptions = () => {
         },
         label:{
           color:"white",
-          fontFamily:'Unbounded',
+          fontFamily:"Unbounded",
           fontSize:9,
-          placement:'outside',
-          // formatter:({value}) => value.toFixed(0)
+          placement:"outside",
           formatter: ({ value, datum }) => value.toFixed(0)
         },
         type: "bar",
@@ -203,9 +200,9 @@ export const BarChartOptions = () => {
         },
         label: {
           color: "white",
-          fontFamily: 'Unbounded',
+          fontFamily: "Unbounded",
           fontSize: 9,
-          placement: 'outside',
+          placement: "outside",
           formatter: ({ value, datum }) => value.toFixed(0)
         },
         type: "bar",
@@ -239,12 +236,12 @@ export const BarChartOptions = () => {
         label:{
           enabled: false,
           avoidCollisions: true,
-          color:'hotpink',
+          color:"hotpink",
         },
         gridLine: {
           style: [
               {
-                  stroke: 'yellow',
+                  stroke: "yellow",
                   lineDash: [1, 5],
               },
           ]
