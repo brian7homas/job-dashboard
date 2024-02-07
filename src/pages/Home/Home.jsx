@@ -35,21 +35,19 @@ function Home() {
     }
     return setLoading(false)
   }
-  const run = async() => await syncTest()
-    .catch(e => {
-      console.log(e)
-      return e
-    })
-
-  useEffect(() => {
-    let jobData = getData(state, setData)
-      jobData.then((res) => {
+  const run = async () => {
+    await syncTest()
+    await getData(state, setData)
+      .then((res) => {
         builDataArray(count(res, "company"), data01)
         builDataArray(count(res, "role"), data02)
-        return run()
-      })      
-  },[])
-  
+      })
+      .catch(e => {
+        console.log(e)
+        return e
+      })
+  }
+  useEffect(() => {run()},[])
   if(!loading){
     return (
       <>
