@@ -1,5 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import { useEffect, useState } from "react";
 import { jsx } from "@emotion/react";
 import { Suspense } from 'react'
 import { AgChartsReact } from 'ag-charts-react';
@@ -9,6 +10,10 @@ import { DataCardStyles } from './DataCard.styles'
 import { Heading, Box, Badge, Text, Card } from '@radix-ui/themes'
 
 function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) {
+  const [options, setOptions] = useState(chartOptions);
+  useEffect(() => {
+    setOptions(chartOptions)
+    },[chartOptions])
   return(
     <Card
       variant="surface"
@@ -41,8 +46,9 @@ function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) 
             height:"100%", 
             paddingTop:"2em"
             }}>
+          
           <Suspense fallback={<Box>...loading</Box>}>
-            <AgChartsReact options={chartOptions} />
+            <AgChartsReact options={options} />
           </Suspense>
         </Box>
       </FlexAlignCenter>

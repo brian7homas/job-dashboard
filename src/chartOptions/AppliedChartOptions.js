@@ -2,7 +2,8 @@ import { sort } from '../data/sort'
 export const AppliedChartOptions = (xData) => {
   if(!xData) return []
   return({
-    data: sort(xData.slice(0, 5), 'appliedDate'),
+    // data: sort(xData.slice(0, 5), 'appliedDate'),
+    data: sort(xData, 'appliedDate'),
     series: [
       {
         type: "line",
