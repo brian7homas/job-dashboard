@@ -1,35 +1,3 @@
-import { AgChartsReact } from 'ag-charts-react';
-import { useState } from 'react'
-let getData = () => ([
-  {
-      position: "Frontend Developer", //? role title
-      company: 3, //? number of companies/applications 
-      remote: 1, //? number of positions that are remote
-      hybrid: 1, //? number of positions that are hybrid
-      onSite: 1, //? number of positions that are on site
-  },
-  {
-      position: "UI/UX Developer",
-      company: 46,
-      remote: 20,
-      hybrid: 14,
-      onSite: 12,
-  },
-  {
-      position: "Wordpress Developer",
-      company: 39,
-      remote: 20,
-      hybrid: 18,
-      onSite: 1,
-  },
-  {
-      position: "React",
-      company: 29,
-      remote: 24,
-      hybrid: 1,
-      onSite: 4,
-  },
-])
 let colors = {
   dataText: "black",
   companies: {
