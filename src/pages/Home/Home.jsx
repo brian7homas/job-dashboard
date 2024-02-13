@@ -105,7 +105,7 @@ function Home() {
               <Box 
                 mt="4"
                 size="4"
-                style={{gridColumn: "1/3", height:'95%', maxHeight:'500', width:'90%', maxWidth:'500'}}>
+                style={{gridColumn: "1/3", height:'90rem', maxHeight:'500', width:'90%', maxWidth:'500'}}>
                 <BarChart/>
               </Box>
               <Box
