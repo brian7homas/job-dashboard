@@ -1,37 +1,5 @@
-import { AgChartsReact } from 'ag-charts-react';
-import { useState } from 'react'
-let getData = () => ([
-  {
-      position: "Frontend Developer", //? role title
-      company: 3, //? number of companies/applications 
-      remote: 1, //? number of positions that are remote
-      hybrid: 1, //? number of positions that are hybrid
-      onSite: 1, //? number of positions that are on site
-  },
-  {
-      position: "UI/UX Developer",
-      company: 46,
-      remote: 20,
-      hybrid: 14,
-      onSite: 12,
-  },
-  {
-      position: "Wordpress Developer",
-      company: 39,
-      remote: 20,
-      hybrid: 18,
-      onSite: 1,
-  },
-  {
-      position: "React",
-      company: 29,
-      remote: 24,
-      hybrid: 1,
-      onSite: 4,
-  },
-])
 let colors = {
-  dataText: 'black',
+  dataText: "black",
   companies: {
     main:"#29ddaa",
     hoverFill: "#7839e6",
@@ -59,16 +27,196 @@ let sharedProps = {
   dimOpacity: .1
 }
 export const BarChartOptions = () => {
+  let container = []
+  const BuildBarChartData = () => {
+    let currentStorage = JSON.parse(localStorage.getItem('jobs'))
+    let filteredRemote = new Array
+    let filteredRemoteRole = new Array
+    let remoteCounter = 0
+    let remoteRoleCounter = 0
+    let filteredHybrid = new Array
+    let filteredHybridRole = new Array
+    let hybridCounter = 0
+    let hybridRoleCounter = 0
+    let filteredOnSite = new Array
+    let filteredOnSiteRole = new Array
+    let onSiteCounter = 0
+    let onSiteRoleCounter = 0
+    let remoteCompaniesResult = {}
+    let hybridCompaniesResult = {}
+    let onSiteCompaniesResult = {}
+    currentStorage.forEach((el) => {
+      let rolePresent = el.role.charAt(0).toUpperCase() + el.role.slice(1)
+      let role = el.role.split(" ").join("-").toLowerCase().trim()
+      let company = el.company.toLowerCase().trim()
+      let location = el.location.split(" ").join("").toLowerCase().trim()
+      //? NOTE - SORTING BY LOCATION BECAUSE EACH JOB CAN BE BROKEN DOWN INTO 1 OF 3 CATEGORIES
+      switch (location) {
+        case 'onsite':
+          if (!filteredOnSite.includes(company)) {
+            onSiteCounter = 0
+            filteredOnSite.push({ company: company, role: role })
+          }
+          if (!filteredOnSiteRole.includes(role)) {
+            onSiteRoleCounter = 0
+            filteredOnSiteRole.push(role)
+          }
+          if (filteredOnSiteRole.includes(role)) {
+            let newCount = filteredOnSite.filter(el => el.role === role).length
+            onSiteRoleCounter++
+            let test = container.find(({ position }) => position === rolePresent)
+            if (onSiteRoleCounter > 1 || test) {
+              let setCount = container.find(({ position }) => position === rolePresent)
+              if (!setCount.remote) setCount.remote = 0
+              if (!setCount.hybrid) setCount.hybrid = 0
+
+              if (!setCount.companyArr.includes(company)) {
+                setCount.companyArr.push({ company: company, role: role })
+                setCount.company = setCount.companyArr.length
+              }
+              return setCount.onsite = newCount
+            }
+            let obj = onSiteCompaniesResult[role] = {
+              position: rolePresent,
+              company: filteredOnSite.filter(el => el.role === role).length,
+              companyArr: filteredOnSite.filter(el => el.role === role),
+              onsite: onSiteRoleCounter,
+            }
+            if (!obj.remote) obj.remote = 0
+            if (!obj.hybrid) obj.hybrid = 0
+            container.push(obj)
+            return container
+          }
+          break
+
+        case 'hybrid':
+          if (!filteredHybrid.includes(company)) {
+            hybridCounter = 0
+            filteredHybrid.push({ company: company, role: role })
+          }
+          if (!filteredHybridRole.includes(role)) {
+            hybridRoleCounter = 0
+            filteredHybridRole.push(role)
+          }
+
+
+          if (filteredHybridRole.includes(role)) {
+            let newCount = filteredHybrid.filter(el => el.role === role).length
+            hybridRoleCounter++
+            let test = container.find(({ position }) => position === rolePresent)
+            if (hybridCompaniesResult > 1 || test) {
+              let setCount = container.find(({ position }) => position === rolePresent)
+              if (!setCount.onsite) setCount.onsite = 0
+              if (!setCount.remote) setCount.remote = 0
+              if (!setCount.companyArr.includes(company)) {
+                setCount.companyArr.push({ company: company, role: role })
+                setCount.company = setCount.companyArr.length
+              }
+              return setCount.hybrid = newCount
+            }
+            let obj = hybridCompaniesResult[role] = {
+              position: rolePresent,
+              company: filteredHybrid.filter(el => el.role === role).length,
+              companyArr: filteredHybrid.filter(el => el.role === role),
+              hybrid: hybridRoleCounter,
+            }
+            if (!obj.onsite) obj.onsite = 0
+            if (!obj.remote) obj.remote = 0
+            container.push(obj)
+            return container
+          }
+          break
+
+        case 'remote':
+          if (!filteredRemote.includes(company)) {
+            remoteCounter = 0
+            filteredRemote.push({ company: company, role: role })
+          }
+          if (!filteredRemoteRole.includes(role)) {
+            remoteRoleCounter = 0
+            filteredRemoteRole.push(role)
+          }
+
+          if (filteredRemoteRole.includes(role)) {
+            let newCount = filteredRemote.filter(el => el.role === role).length
+            remoteRoleCounter++
+            let test = container.find(({ position }) => position === rolePresent)
+            if (remoteCompaniesResult > 1 || test) {
+
+              let setCount = container.find(({ position }) => position === rolePresent)
+              if (!setCount.onsite) setCount.onsite = 0
+              if (!setCount.hybrid) setCount.hybrid = 0
+
+              
+              if (!setCount.companyArr.includes(company)) {
+                setCount.companyArr.push({ company: company, role: role })
+                setCount.company = setCount.companyArr.length
+              }
+              return setCount.remote = newCount
+            }
+            let obj = remoteCompaniesResult[role] = {
+              position: rolePresent,
+              company: filteredRemote.filter(el => el.role === role).length,
+              companyArr: filteredRemote.filter(el => el.role === role),
+              remote: remoteRoleCounter,
+            }
+            if (!obj.onsite) obj.onsite = 0
+            if (!obj.hybrid) obj.hybrid = 0
+            container.push(obj)
+            return container
+          }
+          break
+
+        default:
+          if (!filteredOnSite.includes(company)) {
+            onSiteCounter = 0
+            filteredOnSite.push({ company: company, role: role })
+          }
+          if (!filteredOnSiteRole.includes(role)) {
+            onSiteRoleCounter = 0
+            filteredOnSiteRole.push(role)
+          }
+          if (filteredOnSiteRole.includes(role)) {
+            let newCount = filteredOnSite.filter(el => el.role === role).length
+            onSiteRoleCounter++
+            let test = container.find(({ position }) => position === rolePresent)
+            if (onSiteRoleCounter > 1 || test) {
+              let setCount = container.find(({ position }) => position === rolePresent)
+              if (!setCount.remote) setCount.remote = 0
+              if (!setCount.hybrid) setCount.hybrid = 0
+              
+              if (!setCount.companyArr.includes(company)) {
+                setCount.companyArr.push({ company: company, role: role })
+                setCount.company = setCount.companyArr.length
+              }
+              return setCount.onsite = newCount
+            }
+            let obj = onSiteCompaniesResult[role] = {
+              position: rolePresent,
+              company: filteredOnSite.filter(el => el.role === role).length,
+              companyArr: filteredOnSite.filter(el => el.role === role),
+              onsite: onSiteRoleCounter,
+            }
+            if (!obj.remote) obj.remote = 0
+            if (!obj.hybrid) obj.hybrid = 0
+            container.push(obj)
+            return container
+          }
+          break
+      }
+    })
+  }
+  BuildBarChartData()
   return({
     title: {
-      fontFamily: 'Unbounded',
-      text: "Companies and positions applied to",
+      fontFamily: "Unbounded",
+      text: 'Role details',
     },
     subtitle: {
-      fontFamily: 'Unbounded',
-      text: "Breakdown of each company and the position applied for",
+      fontFamily: "Unbounded",
+      text: "Breakdown of each role and location",
     },
-    data: getData(),
+    data:container,
     background: {
       fill: "transparent"
     },
@@ -84,7 +232,7 @@ export const BarChartOptions = () => {
         fillOpacity:sharedProps.fillOpacity,
         stroke: colors.companies.main,
         strokeWidth: sharedProps.strokeWidth,
-        cursor: 'pointer',
+        cursor: "pointer",
         highlightStyle: {
           item: {
             fill: colors.companies.hoverFill,
@@ -101,11 +249,10 @@ export const BarChartOptions = () => {
         },
         label:{
           color:"white",
-          fontFamily:'Unbounded',
+          fontFamily:"Unbounded",
           fontSize:11,
-          placement:'inside',
-          // formatter:({value}) => value.toFixed(0)
-          formatter: ({ value, datum }) => datum.position + ' ' + value.toFixed(0)
+          placement:"inside",
+          formatter: ({ value, datum }) => datum.position + " " + value.toFixed(0)
         },
       },
       
@@ -133,10 +280,9 @@ export const BarChartOptions = () => {
         },
         label:{
           color:"white",
-          fontFamily:'Unbounded',
+          fontFamily:"Unbounded",
           fontSize:9,
-          placement:'inside',
-          // formatter:({value}) => value.toFixed(0)
+          placement:"outside",
           formatter: ({ value, datum }) => value.toFixed(0)
         },
         type: "bar",
@@ -168,10 +314,9 @@ export const BarChartOptions = () => {
         },
         label:{
           color:"white",
-          fontFamily:'Unbounded',
+          fontFamily:"Unbounded",
           fontSize:9,
-          placement:'outside',
-          // formatter:({value}) => value.toFixed(0)
+          placement:"outside",
           formatter: ({ value, datum }) => value.toFixed(0)
         },
         type: "bar",
@@ -203,16 +348,16 @@ export const BarChartOptions = () => {
         },
         label: {
           color: "white",
-          fontFamily: 'Unbounded',
+          fontFamily: "Unbounded",
           fontSize: 9,
-          placement: 'outside',
+          placement: "outside",
           formatter: ({ value, datum }) => value.toFixed(0)
         },
         type: "bar",
         direction: "horizontal",
         xKey: "position",
-        yKey: "onSite",
-        yName: "Wearables",
+        yKey: "onsite",
+        yName: "On Site",
       },
     ],
     axes:[
@@ -239,12 +384,12 @@ export const BarChartOptions = () => {
         label:{
           enabled: false,
           avoidCollisions: true,
-          color:'hotpink',
+          color:"hotpink",
         },
         gridLine: {
           style: [
               {
-                  stroke: 'yellow',
+                  stroke: "yellow",
                   lineDash: [1, 5],
               },
           ]

@@ -35,21 +35,19 @@ function Home() {
     }
     return setLoading(false)
   }
-  const run = async() => await syncTest()
-    .catch(e => {
-      console.log(e)
-      return e
-    })
-
-  useEffect(() => {
-    let jobData = getData(state, setData)
-      jobData.then((res) => {
+  const run = async () => {
+    await syncTest()
+    await getData(state, setData)
+      .then((res) => {
         builDataArray(count(res, "company"), data01)
         builDataArray(count(res, "role"), data02)
-        return run()
-      })      
-  },[])
-  
+      })
+      .catch(e => {
+        console.log(e)
+        return e
+      })
+  }
+  useEffect(() => {run()},[])
   if(!loading){
     return (
       <>
@@ -107,7 +105,7 @@ function Home() {
               <Box 
                 mt="4"
                 size="4"
-                style={{gridColumn: "1/3", height:'95%', maxHeight:'500', width:'90%', maxWidth:'500'}}>
+                style={{gridColumn: "1/3", height:'90rem', maxHeight:'500', width:'90%', maxWidth:'500'}}>
                 <BarChart/>
               </Box>
               <Box
