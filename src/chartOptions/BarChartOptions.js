@@ -216,7 +216,7 @@ export const BarChartOptions = () => {
       fontFamily: "Unbounded",
       text: "Breakdown of each role and location",
     },
-    data: getData(),
+    data:container,
     background: {
       fill: "transparent"
     },
@@ -356,8 +356,8 @@ export const BarChartOptions = () => {
         type: "bar",
         direction: "horizontal",
         xKey: "position",
-        yKey: "onSite",
-        yName: "Wearables",
+        yKey: "onsite",
+        yName: "On Site",
       },
     ],
     axes:[
