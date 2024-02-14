@@ -1,8 +1,6 @@
 import React, { Suspense, lazy, useContext, useEffect, useState } from 'react'
 import { DataContext } from '../../context/DataContext';
 import Sidebar from '../../components/Sidebar/Sidebar'
-// import BarChart from '../../components/BarChart/BarChart';
-// import PieChart from '../../components/PieChart/PieChart';
 import { PhoneScreensDataLogic } from '../../data/phoneScreensDataLogic';
 import { AppliedDataLogic } from '../../data/appliedDataLogic';
 import { InterviewDataLogic } from '../../data/interviewDataLogic';
@@ -21,7 +19,6 @@ const data01 = [];
 const data02 = [];
 function Home() {
   const [loading, setLoading] = useState(true)
-  const Chart = lazy(() => import("../../components/ChartPie/ChartPie"))
   const DataCard = lazy(() => import("../../components/DataCard/DataCard"))
   const BarChart = lazy(() => import("../../components/BarChart/BarChart"))
   const PieChart = lazy(() => import("../../components/PieChart/PieChart"))
@@ -73,15 +70,16 @@ function Home() {
             {/* SECOND GRID ROW */}
             {/* //TODO - Buld/import separate component for loading */}
             <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height:"50vh"}} justify="center">..loading...</FlexAlignCenter>}>
-              <DataCard
-                metric={appliedData.appliedLocations.length}
-                chartOptions={AppliedChartOptions(appliedData.appliedLocations)}
-                average={((100 * appliedData.appliedLocations.length) / state.length).toFixed(0)}
-                title="Applied"
-                icon={faBriefcase}
-                sub="Location most applied to:"
-                subData={appliedData.mostFrequent}
-              />
+                <DataCard
+                  metric={appliedData.appliedLocations.length}
+                  chartOptions={AppliedChartOptions(appliedData.appliedLocations)}
+                  average={((100 * appliedData.appliedLocations.length) / state.length).toFixed(0)}
+                  title="Applied"
+                  icon={faBriefcase}
+                  sub="Location most applied to:"
+                  subData={appliedData.mostFrequent}
+                />
+              
               <DataCard
                 metric={phoneData.phoneScreenDates.length}
                 chartOptions={PhoneScrensChartOptions(phoneData.phoneScreenDates)}
@@ -101,23 +99,19 @@ function Home() {
                 subData={interviewData.mostRecentInterviewDate}
               />
             </Suspense>
-            <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height:"50vh" }} justify="center">..loading...</FlexAlignCenter>}>
-              <Box 
+            <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height: "50vh" }} justify="center">..loading...</FlexAlignCenter>}>
+              <Box
                 mt="4"
                 size="4"
-                style={{gridColumn: "1/3", height:'90rem', maxHeight:'500', width:'90%', maxWidth:'500'}}>
-                <BarChart/>
+                style={{ gridColumn: "1/4", alignItems: "center", height: "90rem", maxHeight: '500', width: '90%', maxWidth: '500' }}>
+                <BarChart />
               </Box>
               <Box
-                style={{gridColumn: "3/4", height:'95%', maxHeight:'500', width:'90%', maxWidth:'500'}}
+                style={{ gridColumn: "1/4", height: '95%', maxHeight: '500', width: '90%', maxWidth: '500' }}
               >
-              <PieChart/>
+                <PieChart />
               </Box>
             </Suspense>
-            {/* <Suspense fallback={<div>..loading...</div>}>
-              <Chart data01={data01} data02={data02}/>
-            </Suspense> */}
-            {/* THIRD GRID ROW */}
           </Grid>
       </Grid>
       </>

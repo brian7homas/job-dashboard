@@ -19,7 +19,6 @@ function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) 
       variant="surface"
       size="3"
       color={average < 50 ? "red" : "green"}
-      // style={{maxWidth:204}}
       css={DataCardStyles.container}
       mt="3"
       >
