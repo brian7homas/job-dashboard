@@ -1,18 +1,9 @@
-import { AgChartsReact } from 'ag-charts-react';
-import { useState } from 'react'
-let getData = () => ([
-  { asset: 'Stocks', amount: 60000 },
-  { asset: 'Bonds', amount: 40000 },
-  { asset: 'Cash', amount: 7000 },
-  { asset: 'Real Estate', amount: 5000 },
-  { asset: 'Commodities', amount: 3000 },
-])
 let placeholderArr = []
 let resultArr = []
 let counter = 0
-const RETURN = () => {
+const PieChartData = () => {
   let currentStorage = JSON.parse(localStorage.getItem('jobs'))
-  let result = currentStorage.map(el => {
+  currentStorage.map(el => {
     let companyPresent = el.company.charAt(0).toUpperCase() + el.company.slice(1)
     let company = el.company.split(" ").join("-").toLowerCase().trim()
     if(company && !placeholderArr.includes(company)){
@@ -36,18 +27,61 @@ const RETURN = () => {
 
 export const PieChartOptions = () => {
   return(({
-    data: RETURN(),
+    data: PieChartData(),
     title: {
-      text: "Portfolio Composition",
+      text: "Total Companies",
     },
     background:{
       fill: 'transparent'
     },
     series: [
       {
+        
         type: "pie",
         angleKey: "count",
         legendItemKey: "company",
+        calloutLabelKey: "count",
+        sectorLabelKey: "company",
+        cursor:"pointer",
+        fills:["#29ddaa", "#7839e6", "#dd2929", "#2971dd", "#b629dd", "#7839e6", "#036cff"],
+        fillOpacity:.4,
+        strokes:["#29ddaa", "#7839e6", "#dd2929", "#2971dd", "#b629dd", "#7839e6", "#036cff"],
+        sectorLabel: {
+          fontFamily: "Unbounded",
+          fontWeight: 900
+        },
+        calloutLabel:{
+          avoidCollisions: true,
+          color:"white",
+          fontFamily: "Unbounded",
+          fontWeight: 900
+        },
+        tooltip:{
+          enabled:true,
+          interaction:{
+            enabled:true
+          },
+          renderer: ({title, datum}) => {
+            return({
+              title: datum.company + ' : ' + datum.count,
+              content: '',
+              color: "hsl(0, 0%, 100%)",
+              backgroundColor:  "hsl(0, 0%, 10%)",
+            })
+            }
+        },
+        highlightStyle:{
+          item:{
+            stroke: "#29ddaa",
+            fill:'black',
+            strokeWidth:2,
+            fillOpacity:1
+          },
+          series:{
+            dimOpacity:1,
+            strokeWidth: .4
+          }
+        }
       },
     ],
   })
