@@ -70,15 +70,16 @@ function Home() {
             {/* SECOND GRID ROW */}
             {/* //TODO - Buld/import separate component for loading */}
             <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height:"50vh"}} justify="center">..loading...</FlexAlignCenter>}>
-              <DataCard
-                metric={appliedData.appliedLocations.length}
-                chartOptions={AppliedChartOptions(appliedData.appliedLocations)}
-                average={((100 * appliedData.appliedLocations.length) / state.length).toFixed(0)}
-                title="Applied"
-                icon={faBriefcase}
-                sub="Location most applied to:"
-                subData={appliedData.mostFrequent}
-              />
+                <DataCard
+                  metric={appliedData.appliedLocations.length}
+                  chartOptions={AppliedChartOptions(appliedData.appliedLocations)}
+                  average={((100 * appliedData.appliedLocations.length) / state.length).toFixed(0)}
+                  title="Applied"
+                  icon={faBriefcase}
+                  sub="Location most applied to:"
+                  subData={appliedData.mostFrequent}
+                />
+              
               <DataCard
                 metric={phoneData.phoneScreenDates.length}
                 chartOptions={PhoneScrensChartOptions(phoneData.phoneScreenDates)}
@@ -98,17 +99,17 @@ function Home() {
                 subData={interviewData.mostRecentInterviewDate}
               />
             </Suspense>
-            <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height:"50vh" }} justify="center">..loading...</FlexAlignCenter>}>
-              <Box 
+            <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height: "50vh" }} justify="center">..loading...</FlexAlignCenter>}>
+              <Box
                 mt="4"
                 size="4"
-                style={{gridColumn: "1/3", height:'90rem', maxHeight:'500', width:'90%', maxWidth:'500'}}>
-                <BarChart/>
+                style={{ gridColumn: "1/4", alignItems: "center", height: "90rem", maxHeight: '500', width: '90%', maxWidth: '500' }}>
+                <BarChart />
               </Box>
               <Box
-                style={{gridColumn: "3/4", height:'95%', maxHeight:'500', width:'90%', maxWidth:'500'}}
+                style={{ gridColumn: "1/4", height: '95%', maxHeight: '500', width: '90%', maxWidth: '500' }}
               >
-              <PieChart/>
+                <PieChart />
               </Box>
             </Suspense>
           </Grid>
