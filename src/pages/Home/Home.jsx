@@ -1,8 +1,6 @@
 import React, { Suspense, lazy, useContext, useEffect, useState } from 'react'
 import { DataContext } from '../../context/DataContext';
 import Sidebar from '../../components/Sidebar/Sidebar'
-// import BarChart from '../../components/BarChart/BarChart';
-// import PieChart from '../../components/PieChart/PieChart';
 import { PhoneScreensDataLogic } from '../../data/phoneScreensDataLogic';
 import { AppliedDataLogic } from '../../data/appliedDataLogic';
 import { InterviewDataLogic } from '../../data/interviewDataLogic';
@@ -21,7 +19,6 @@ const data01 = [];
 const data02 = [];
 function Home() {
   const [loading, setLoading] = useState(true)
-  const Chart = lazy(() => import("../../components/ChartPie/ChartPie"))
   const DataCard = lazy(() => import("../../components/DataCard/DataCard"))
   const BarChart = lazy(() => import("../../components/BarChart/BarChart"))
   const PieChart = lazy(() => import("../../components/PieChart/PieChart"))
@@ -114,10 +111,6 @@ function Home() {
               <PieChart/>
               </Box>
             </Suspense>
-            {/* <Suspense fallback={<div>..loading...</div>}>
-              <Chart data01={data01} data02={data02}/>
-            </Suspense> */}
-            {/* THIRD GRID ROW */}
           </Grid>
       </Grid>
       </>
