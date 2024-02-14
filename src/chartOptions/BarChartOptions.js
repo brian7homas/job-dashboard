@@ -245,7 +245,15 @@ export const BarChartOptions = () => {
           }
         },
         tooltip:{
-          enabled:false
+          enabled:true,
+          renderer: ({datum}) => {
+            return({
+              title:datum.position,
+              content: 'There is a total of ' + (datum.onsite + datum.hybrid + datum.remote + ' ' + datum.position) + ' positions',
+              color: "hsl(0, 0%, 100%)",
+              backgroundColor:  "hsl(0, 0%, 10%)",
+            })
+            }
         },
         label:{
           color:"white",
@@ -276,7 +284,15 @@ export const BarChartOptions = () => {
 
         },
         tooltip:{
-          enabled:false
+          enabled:true,
+          renderer: ({title, datum}) => {
+            return({
+              title: datum.remote + ' remote ' + datum.position + ' positions',
+              content: '',
+              color: "hsl(0, 0%, 100%)",
+              backgroundColor:  "hsl(0, 0%, 10%)",
+            })
+            }
         },
         label:{
           color:"white",
@@ -310,7 +326,15 @@ export const BarChartOptions = () => {
 
         },
         tooltip:{
-          enabled:false
+          enabled:true,
+          renderer: ({title, datum}) => {
+            return({
+              title: datum.hybrid + ' hybrid ' + datum.position + ' positions',
+              content: '',
+              color: "hsl(0, 0%, 100%)",
+              backgroundColor:  "hsl(0, 0%, 10%)",
+            })
+            }
         },
         label:{
           color:"white",
@@ -344,7 +368,16 @@ export const BarChartOptions = () => {
 
         },
         tooltip: {
-          enabled: false
+          enabled: true,
+          renderer: ({title, datum}) => {
+            console.log(datum)
+            return({
+              title: datum.onsite + ' onsite ' + datum.position + ' positions',
+              content: '',
+              color: "hsl(0, 0%, 100%)",
+              backgroundColor:  "hsl(0, 0%, 10%)",
+            })
+            }
         },
         label: {
           color: "white",
