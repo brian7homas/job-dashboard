@@ -1,8 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React from 'react';
-import { useEffect, useState, useContext } from 'react';
-import { DataContext } from '../../context/DataContext';
+import { useState, useEffect } from 'react';
 import { jsx } from '@emotion/react';
 import { Suspense } from 'react'
 import { AgChartsReact } from 'ag-charts-react';
@@ -10,12 +9,9 @@ import { FlexAlignCenter } from '../../styles/utils/flexAlignCenter.styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DataCardStyles } from './DataCard.styles'
 import { Heading, Box, Badge, Text, Card } from '@radix-ui/themes'
-import { InterviewDataLogic } from '../../data/interviewDataLogic';
-import { PhoneScreensDataLogic } from '../../data/phoneScreensDataLogic'
-import { AppliedDataLogic } from '../../data/appliedDataLogic'
 import { InterViewChartOptions } from '../../chartOptions/InterviewChartOptions';
 import { AppliedChartOptions } from '../../chartOptions/AppliedChartOptions';
-import { PhoneScrensChartOptions } from '../../chartOptions/PhoneScreensChartOptions';
+import { PhoneScreensChartOptions } from '../../chartOptions/PhoneScreensChartOptions';
 import { faBriefcase, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
 
 function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) {
