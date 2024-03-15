@@ -94,8 +94,6 @@ function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) 
 }
 
 export function Interviews() {
-  const {state, setData} = useContext(DataContext)
-  const interviewData = InterviewDataLogic(state)
   return (
     <>
       <DataCard
@@ -111,8 +109,6 @@ export function Interviews() {
   )
 }
 export function PhoneScreens() {
-  const {state, setData} = useContext(DataContext)
-  const phoneData = PhoneScreensDataLogic(state)
   return (
     <>
       <DataCard
@@ -129,8 +125,6 @@ export function PhoneScreens() {
 }
 
 export function Applied() {
-  const {state, setData} = useContext(DataContext)
-  const appliedData = AppliedDataLogic(state)
   return (
     <>
       <DataCard
