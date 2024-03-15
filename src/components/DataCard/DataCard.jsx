@@ -1,13 +1,18 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useEffect, useState } from "react";
-import { jsx } from "@emotion/react";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { jsx } from '@emotion/react';
 import { Suspense } from 'react'
 import { AgChartsReact } from 'ag-charts-react';
 import { FlexAlignCenter } from '../../styles/utils/flexAlignCenter.styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DataCardStyles } from './DataCard.styles'
 import { Heading, Box, Badge, Text, Card } from '@radix-ui/themes'
+import { InterViewChartOptions } from '../../chartOptions/InterviewChartOptions';
+import { AppliedChartOptions } from '../../chartOptions/AppliedChartOptions';
+import { PhoneScreensChartOptions } from '../../chartOptions/PhoneScreensChartOptions';
+import { faBriefcase, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
 
 function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) {
   const [options, setOptions] = useState(chartOptions);
@@ -88,4 +93,49 @@ function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) 
   )
 }
 
-export default DataCard
+export function Interviews() {
+  return (
+    <>
+      <DataCard
+        metric={InterViewChartOptions().data.length}
+        chartOptions={InterViewChartOptions()}
+        average={((100 * InterViewChartOptions().data.length) / InterViewChartOptions().currentStorage.length).toFixed(0)}
+        title="Interviews"
+        icon={faUser}
+        sub="Next interview"
+        subData={InterViewChartOptions().mostRecentInterviewDate}
+      />
+    </>
+  )
+}
+export function PhoneScreens() {
+  return (
+    <>
+      <DataCard
+        metric={PhoneScreensChartOptions().data.length}
+        chartOptions={PhoneScreensChartOptions()}
+        average={((100 * PhoneScreensChartOptions().data.length) / PhoneScreensChartOptions().currentStorage.length).toFixed(0)}
+        title="Phone screens"
+        icon={faPhone}
+        sub="Next phone screen"
+        subData={PhoneScreensChartOptions().mostRecentDate}
+      />
+    </>
+  )
+}
+
+export function Applied() {
+  return (
+    <>
+      <DataCard
+        metric={AppliedChartOptions().data.length}
+        chartOptions={AppliedChartOptions()}
+        average={((100 * AppliedChartOptions().data.length) / AppliedChartOptions().currentStorage.length).toFixed(0)}
+        title="Applied"
+        icon={faBriefcase}
+        sub="Location most applied to:"
+        subData={AppliedChartOptions().mostFrequent}
+      />
+    </>
+  )
+}
