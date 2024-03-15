@@ -65,14 +65,10 @@ function Home() {
               <Interviews />
             </Suspense>
             <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height: "50vh" }} justify="center">..loading...</FlexAlignCenter>}>
-              <Box mt="4" size="4" style={{ gridColumn: "1/4", alignItems: "center", height: "90rem", maxHeight: '500', width: '90%', maxWidth: '500' }}>
-                <BarChart />
-              </Box>
+              <BarChart />
             </Suspense>
             <Suspense fallback={<FlexAlignCenter style={{ gridColumn: "1/4", height: "50vh" }} justify="center">..loading...</FlexAlignCenter>}>
-              <Box style={{ gridColumn: "1/4", height: '95%', maxHeight: '500', width: '90%', maxWidth: '500' }}>
-                <PieChart />
-              </Box>
+              <PieChart />
             </Suspense>
           </Grid>
       </Grid>
