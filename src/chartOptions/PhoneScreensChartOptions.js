@@ -1,7 +1,15 @@
+import { useContext } from 'react'
 import { sort } from '../data/sort'
-export const PhoneScrensChartOptions = (xData) => {
+import { DataContext } from '../context/DataContext'
+import { PhoneScreensDataLogic } from '../data/phoneScreensDataLogic'
+export const PhoneScreensChartOptions = () => {
+  const { state } = useContext(DataContext)
+  let currentStorage = JSON.parse(localStorage.getItem('jobs'))
+  let filteredData = PhoneScreensDataLogic(state)
   return({
-    data: sort(xData.slice(0,4), 'phoneScreenDate') ,
+    currentStorage: currentStorage,
+    mostRecentDate: filteredData.mostRecentDate,
+    data: sort(filteredData.phoneScreenDates, 'phoneScreenDate'),
     series: [
       {
         type: "line",
