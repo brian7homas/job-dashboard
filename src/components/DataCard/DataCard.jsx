@@ -97,13 +97,13 @@ export function Interviews() {
   return (
     <>
       <DataCard
-        metric={interviewData.interviewDates.length}
-        chartOptions={InterViewChartOptions(interviewData.interviewDates)}
-        average={((100 * interviewData.interviewDates.length) / state.length).toFixed(0)}
+        metric={InterViewChartOptions().data.length}
+        chartOptions={InterViewChartOptions()}
+        average={((100 * InterViewChartOptions().data.length) / InterViewChartOptions().currentStorage.length).toFixed(0)}
         title="Interviews"
         icon={faUser}
         sub="Next interview"
-        subData={interviewData.mostRecentInterviewDate}
+        subData={InterViewChartOptions().mostRecentInterviewDate}
       />
     </>
   )
@@ -112,13 +112,13 @@ export function PhoneScreens() {
   return (
     <>
       <DataCard
-        metric={phoneData.phoneScreenDates.length}
-        chartOptions={PhoneScrensChartOptions(phoneData.phoneScreenDates)}
-        average={((100 * phoneData.phoneScreenDates.length) / state.length).toFixed(0)}
+        metric={PhoneScreensChartOptions().data.length}
+        chartOptions={PhoneScreensChartOptions()}
+        average={((100 * PhoneScreensChartOptions().data.length) / PhoneScreensChartOptions().currentStorage.length).toFixed(0)}
         title="Phone screens"
         icon={faPhone}
         sub="Next phone screen"
-        subData={phoneData.mostRecentDate}
+        subData={PhoneScreensChartOptions().mostRecentDate}
       />
     </>
   )
@@ -128,13 +128,13 @@ export function Applied() {
   return (
     <>
       <DataCard
-        metric={appliedData.appliedLocations.length}
-        chartOptions={AppliedChartOptions(appliedData.appliedLocations)}
-        average={((100 * appliedData.appliedLocations.length) / state.length).toFixed(0)}
+        metric={AppliedChartOptions().data.length}
+        chartOptions={AppliedChartOptions()}
+        average={((100 * AppliedChartOptions().data.length) / AppliedChartOptions().currentStorage.length).toFixed(0)}
         title="Applied"
         icon={faBriefcase}
         sub="Location most applied to:"
-        subData={appliedData.mostFrequent}
+        subData={AppliedChartOptions().mostFrequent}
       />
     </>
   )
