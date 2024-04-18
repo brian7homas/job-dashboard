@@ -7,7 +7,7 @@ export const PhoneScreensChartOptions = () => {
   let currentStorage = JSON.parse(localStorage.getItem('jobs'))
   let filteredData = PhoneScreensDataLogic(state)
   return({
-    currentStorage: currentStorage,
+    currentStorage: [],
     mostRecentDate: filteredData.mostRecentDate,
     data: sort(filteredData.phoneScreenDates, 'phoneScreenDate'),
     series: [

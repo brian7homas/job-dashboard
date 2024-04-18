@@ -7,7 +7,7 @@ export const InterViewChartOptions = () => {
   let currentStorage = JSON.parse(localStorage.getItem('jobs'))
   let filteredData = InterviewDataLogic(state)
   return({
-    currentStorage: currentStorage,
+    currentStorage: [],
     mostRecentInterviewDate:filteredData.mostRecentInterviewDate,
     data: sort(filteredData.interviewDates, 'interviewDate') ,
     series: [

@@ -9,7 +9,7 @@ export const AppliedChartOptions = () => {
   let currentStorage = JSON.parse(localStorage.getItem('jobs'))
   let filteredData = AppliedDataLogic(state)
   return({
-    currentStorage: currentStorage,
+    currentStorage: [],
     mostFrequent:filteredData.mostFrequent,
     data: sort(filteredData.appliedLocations, 'appliedDate'),
     series: [
