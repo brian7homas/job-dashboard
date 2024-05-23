@@ -1,15 +1,12 @@
-import { useContext } from 'react'
 import { sort } from '../data/sort'
-import { DataContext } from '../context/DataContext'
-import { InterviewDataLogic } from '../data/interviewDataLogic'
-export const InterViewChartOptions = () => {
-  const { state } = useContext(DataContext)
-  let currentStorage = JSON.parse(localStorage.getItem('jobs'))
-  let filteredData = InterviewDataLogic(state)
+export const InterViewChartOptions = (state) => {
   return({
     currentStorage: [],
-    mostRecentInterviewDate:filteredData.mostRecentInterviewDate,
-    data: sort(filteredData.interviewDates, 'interviewDate') ,
+    mostRecentInterviewDate:state.mostRecentInterviewDate,
+    data: sort(state.interviewDates, 'interviewDate') ,
+    height:200,
+    width:300,
+    autoSize:false,
     series: [
       {
         type: "line",

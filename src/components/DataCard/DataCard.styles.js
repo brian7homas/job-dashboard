@@ -8,7 +8,8 @@ export const DataCardStyles = {
     maxWidth:350,
     border: `2.5px solid ${props.color}`,
     alignSelf: 'flex-start',
-    backgroundColor: 'var(--color-light);',
+    backgroundColor: 'hsl(0, 0%, 14.196078431372548%)',
+    
     borderRadius: '9px',
   }),
   subTitle: css({

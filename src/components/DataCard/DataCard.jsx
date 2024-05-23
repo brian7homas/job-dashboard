@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { jsx } from '@emotion/react';
 import { Suspense } from 'react'
 import { AgChartsReact } from 'ag-charts-react';
@@ -13,12 +13,12 @@ import { InterViewChartOptions } from '../../chartOptions/InterviewChartOptions'
 import { AppliedChartOptions } from '../../chartOptions/AppliedChartOptions';
 import { PhoneScreensChartOptions } from '../../chartOptions/PhoneScreensChartOptions';
 import { faBriefcase, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
+import { InterviewDataLogic } from '../../data/interviewDataLogic';
+import { AppliedDataLogic } from '../../data/appliedDataLogic';
+import { PhoneScreensDataLogic } from '../../data/phoneScreensDataLogic';
+import { DataContext } from '../../context/DataContext';
 
 function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) {
-  const [options, setOptions] = useState(chartOptions);
-  useEffect(() => {
-    setOptions(chartOptions)
-    },[chartOptions])
   return(
     <Card
       variant="surface"
@@ -46,13 +46,14 @@ function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) 
         >
         <Box 
           style={{
-            width:300, 
-            height:"100%", 
+            height:'300px', 
+            maxHeight:180, 
             paddingTop:"2em"
-            }}>
+            }}
+          >
           
           <Suspense fallback={<Box>...loading</Box>}>
-            <AgChartsReact options={options} />
+            <AgChartsReact options={chartOptions} />
           </Suspense>
         </Box>
       </FlexAlignCenter>
@@ -94,47 +95,69 @@ function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) 
 }
 
 export function Interviews() {
+  const { state } = useContext(DataContext)
+  const [options, setOptions] = useState({})
+  const [metric, setMetric] = useState(0)
+  useEffect(() => {
+    setMetric(InterviewDataLogic(state).interviewDates)
+    setOptions(InterViewChartOptions(InterviewDataLogic(state)))
+    
+  }, [])
   return (
     <>
       <DataCard
-        metric={InterViewChartOptions().data.length}
-        chartOptions={InterViewChartOptions()}
-        average={((100 * InterViewChartOptions().data.length) / InterViewChartOptions().currentStorage.length).toFixed(0)}
+        metric={metric.length}
+        chartOptions={options}
+        average={((100 * metric.length) / state.length).toFixed(0)}
         title="Interviews"
         icon={faUser}
         sub="Next interview"
-        subData={InterViewChartOptions().mostRecentInterviewDate}
+        subData={options.mostRecentInterviewDate}
       />
     </>
   )
 }
 export function PhoneScreens() {
+  const { state } = useContext(DataContext)
+  const [options, setOptions] = useState({})
+  const [metric, setMetric] = useState(0)
+  useEffect(() => {
+    setMetric(PhoneScreensDataLogic(state).phoneScreenDates)
+    setOptions(PhoneScreensChartOptions(PhoneScreensDataLogic(state)))
+  }, [])
   return (
     <>
       <DataCard
-        metric={PhoneScreensChartOptions().data.length}
-        chartOptions={PhoneScreensChartOptions()}
-        average={((100 * PhoneScreensChartOptions().data.length) / PhoneScreensChartOptions().currentStorage.length).toFixed(0)}
+        metric={metric.length}
+        chartOptions={options}
+        average={((100 * metric.length) / state.length).toFixed(0)}
         title="Phone screens"
         icon={faPhone}
         sub="Next phone screen"
-        subData={PhoneScreensChartOptions().mostRecentDate}
+        subData={options.mostRecentDate}
       />
     </>
   )
 }
 
 export function Applied() {
+  const { state } = useContext(DataContext)
+  const [options, setOptions] = useState(AppliedDataLogic(state))
+  const [metric, setMetric] = useState(0)
+  useEffect(() => {
+    setMetric(AppliedDataLogic(state).appliedLocations)
+    setOptions(AppliedChartOptions(AppliedDataLogic(state)))
+  }, [])
   return (
     <>
       <DataCard
-        metric={AppliedChartOptions().data.length}
-        chartOptions={AppliedChartOptions()}
-        average={((100 * AppliedChartOptions().data.length) / AppliedChartOptions().currentStorage.length).toFixed(0)}
+        metric={metric.length}
+        chartOptions={options}
+        average={((100 * metric.length) / state.length).toFixed(0)}
         title="Applied"
         icon={faBriefcase}
         sub="Location most applied to:"
-        subData={AppliedChartOptions().mostFrequent}
+        subData={options.mostFrequent}
       />
     </>
   )

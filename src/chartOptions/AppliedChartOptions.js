@@ -1,17 +1,13 @@
-import { useContext } from 'react'
 import { sort } from '../data/sort'
-import { DataContext } from '../context/DataContext'
 
-import { AppliedDataLogic } from '../data/appliedDataLogic'
-
-export const AppliedChartOptions = () => {
-  const {state} = useContext(DataContext)
-  let currentStorage = JSON.parse(localStorage.getItem('jobs'))
-  let filteredData = AppliedDataLogic(state)
+export const AppliedChartOptions = (data) => {
   return({
     currentStorage: [],
-    mostFrequent:filteredData.mostFrequent,
-    data: sort(filteredData.appliedLocations, 'appliedDate'),
+    mostFrequent:data.mostFrequent,
+    data: sort(data.appliedLocations, 'appliedDate'),
+    height:200,
+    width:300,
+    autoSize:false,
     series: [
       {
         type: "line",
