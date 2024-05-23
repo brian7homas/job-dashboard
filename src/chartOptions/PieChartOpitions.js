@@ -1,41 +1,6 @@
-import { useContext } from "react"
-import { DataContext } from "../context/DataContext"
-import getData from "../data/GetData"
-let placeholderArr = []
-let resultArr = []
-let counter = 0
-const PieChartData = () => {
-  const { state, setData } = useContext(DataContext)
-  
-  let data = getData(setData)
-  data.then((resolve)=>(
-    resolve.map(el => {
-      let companyPresent = el.company.charAt(0).toUpperCase() + el.company.slice(1)
-      let company = el.company.split(" ").join("-").toLowerCase().trim()
-      if(company && !placeholderArr.includes(company)){
-        counter = 0
-        placeholderArr.push(company)
-      }
-      
-      if(placeholderArr.includes(company)){
-        counter++
-        let test = resultArr.find(el => el.company === companyPresent)
-        if(test){
-          return test.count = counter
-        }
-        return resultArr.push({company:companyPresent, count: counter})
-      }
-      
-    })
-    ))
-  let currentStorage = JSON.parse(localStorage.getItem('jobs'))
-  return resultArr
-}
-
-
-export const PieChartOptions = () => {
+export const PieChartOptions = (data) => {
   return(({
-    data: PieChartData(),
+    data: data,
     title: {
       text: "Total Companies",
     },

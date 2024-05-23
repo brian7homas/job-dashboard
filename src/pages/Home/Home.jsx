@@ -11,11 +11,25 @@ import { Grid } from '@radix-ui/themes'
 import { MainContentHeader } from './Home.styles'
 import { FlexAlignCenter } from '../../styles/utils/flexAlignCenter.styles';
 import { Applied, PhoneScreens, Interviews } from '../../components/DataCard/DataCard';
+import GetData from '../../data/GetData';
+import { DataContext } from '../../context/DataContext';
 
 function Home() {
   const BarChart = lazy(() => import("../../components/BarChart/BarChart"))
   const PieChart = lazy(() => import("../../components/PieChart/PieChart"))
-  
+  const { state, setData } = useContext(DataContext)
+  const data = GetData()
+  useEffect(() => {
+    data.then(response => {
+      setData({ type: 'LOAD', payload: response})
+      localStorage.setItem('jobs', JSON.stringify(response))
+    })
+  },[])
+  if(state.length < 1) return(
+    <>
+      Loading
+    </>
+  )
   return (
     <>
       <Grid 

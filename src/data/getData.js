@@ -1,4 +1,5 @@
 const url = "/jobs.js"
+
 const request = new Request(url)
 async function GetData() {
   try {
