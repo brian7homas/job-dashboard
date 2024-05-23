@@ -13,7 +13,6 @@ import { Theme } from '@radix-ui/themes';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-    <GlobalStyles />
       <DataProvider>
         <Theme>
           <ThemeProvider>
