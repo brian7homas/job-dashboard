@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { jsx } from '@emotion/react';
 import { Suspense } from 'react'
 import { AgChartsReact } from 'ag-charts-react';
@@ -13,12 +13,12 @@ import { InterViewChartOptions } from '../../chartOptions/InterviewChartOptions'
 import { AppliedChartOptions } from '../../chartOptions/AppliedChartOptions';
 import { PhoneScreensChartOptions } from '../../chartOptions/PhoneScreensChartOptions';
 import { faBriefcase, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
+import { InterviewDataLogic } from '../../data/interviewDataLogic';
+import { AppliedDataLogic } from '../../data/appliedDataLogic';
+import { PhoneScreensDataLogic } from '../../data/phoneScreensDataLogic';
+import { DataContext } from '../../context/DataContext';
 
 function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) {
-  const [options, setOptions] = useState(chartOptions);
-  useEffect(() => {
-    setOptions(chartOptions)
-    },[chartOptions])
   return(
     <Card
       variant="surface"
@@ -46,13 +46,14 @@ function DataCard({ icon, title, sub, average, chartOptions, metric, subData }) 
         >
         <Box 
           style={{
-            width:300, 
-            height:"100%", 
+            height:'300px', 
+            maxHeight:180, 
             paddingTop:"2em"
-            }}>
+            }}
+          >
           
           <Suspense fallback={<Box>...loading</Box>}>
-            <AgChartsReact options={options} />
+            <AgChartsReact options={chartOptions} />
           </Suspense>
         </Box>
       </FlexAlignCenter>
